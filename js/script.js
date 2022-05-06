@@ -1,31 +1,69 @@
-import { books } from "./data/bookList.js";
+// import { books } from "./data/bookList.js";
+
+let books = [
+  {
+    isbn: "1600506460320",
+    title: "Great book",
+  },
+  {
+    isbn: "1600506460373",
+    title: "Ok book",
+  },
+  {
+    isbn: "1600506460521",
+    title: "Bad book",
+  },
+  {
+    isbn: "1600506460456",
+    title: "Terrible book",
+  },
+];
 
 const bookList = document.querySelector("ul.book-list");
 
-const templateList = books.map(createHtmlList).join('');
+function onRemove(event) {
+  const target = event.target;
+  const id = target.parentElement.id;
 
-bookList.innerHTML = templateList;
+  const filteredBooks = books.filter(function (book) {
+    return book.isbn !== id;
+  });
 
-function createHtmlList(book) {
-  return `<li id="${book.isbn}">${book.title}</li>`;
+  const filteredBooksHtml = filteredBooks.map(createBookElement);
+
+  bookList.innerHTML = "";
+
+  bookList.append(...filteredBooksHtml);
+  books = filteredBooks;
 }
 
-console.log(templateList);
-// const bookContainer = document.querySelector(".book-container");
+function createBookElement(book) {
+  const element = document.createElement("li");
 
-// console.log(bookContainer);
+  const button = document.createElement("button");
+  button.innerText = "remove";
+  button.addEventListener("click", onRemove);
 
-// let html = "";
+  element.id = book.isbn;
+  element.innerText = book.title;
 
-// for (let i = 0; i < books.length; i++) {
-//   //   html = html + "<h4>" + books[i].title + "</h4>";
+  element.append(button);
 
-//   html += `<div class="book">
-//                 <h4>${books[i].title}</h4>
-//                 <p>${books[i].isbn}</p>
-//             </div>`;
+  //   element.addEventListener("click", console.log);
 
-//   console.log(html);
+  return element;
+}
+
+function start() {
+  const templateList = books.map(createBookElement);
+
+  bookList.append(...templateList);
+}
+
+start();
+
+// bookList.innerHTML = templateList;
+
+// function createHtmlList(book) {
+//   return `<li id="${book.isbn}">${book.title}</li>`;
 // }
-
-// bookContainer.innerHTML = html;
