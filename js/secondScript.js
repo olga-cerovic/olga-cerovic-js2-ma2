@@ -17,6 +17,7 @@ function addToList() {
     createList();
     saveToStorage(listItems);
     listInput.value = "";
+    listInput.focus();
     console.log(listItems);
   }
 }
