@@ -21,3 +21,7 @@ body {
   margin: 1rem;
   padding: 0 1rem 1rem;
 }
+
+.complete {
+  text-decoration: line-through;
+}
