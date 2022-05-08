@@ -1,6 +1,10 @@
-const listKey = "list";
+import { handleClick } from "./ui/handleClick.js";
+import { retrieveFromStorage } from "./ui/retrieveFromStorage.js";
+import { saveToStorage } from "./ui/saveToStorage.js";
 
-let listItems = retrieveFromStorage();
+export const listKey = "list";
+
+export let listItems = retrieveFromStorage();
 
 createList();
 
@@ -18,7 +22,6 @@ function addToList() {
     saveToStorage(listItems);
     listInput.value = "";
     listInput.focus();
-    console.log(listItems);
   }
 }
 
@@ -44,12 +47,7 @@ function createList() {
   });
 }
 
-function handleClick(event) {
-  event.target.classList.toggle("complete");
-}
-
 function removeFromList(event) {
-  console.log(event);
   const deleteThisItem = event.target.dataset.item;
 
   const newList = listItems.filter(function (item) {
@@ -60,16 +58,4 @@ function removeFromList(event) {
 
   listItems = newList;
   createList();
-}
-
-function saveToStorage(valueToSave) {
-  localStorage.setItem(listKey, JSON.stringify(valueToSave));
-}
-
-function retrieveFromStorage() {
-  const currentList = localStorage.getItem(listKey);
-  if (!currentList) {
-    return [];
-  }
-  return JSON.parse(currentList);
 }
