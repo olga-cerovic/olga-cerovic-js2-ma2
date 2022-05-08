@@ -19,7 +19,7 @@ let books = [
 
 const bookList = document.querySelector("ul.book-list");
 
-const noData = document.createElement("h3");
+const noData = document.createElement("p");
 noData.innerText = "The list is empty. No items to show.";
 
 function onRemove(event) {
