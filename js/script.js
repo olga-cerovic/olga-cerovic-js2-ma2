@@ -1,5 +1,3 @@
-// import { books } from "./data/bookList.js";
-
 let books = [
   {
     isbn: "1600506460320",
@@ -21,6 +19,9 @@ let books = [
 
 const bookList = document.querySelector("ul.book-list");
 
+const noData = document.createElement("h3");
+noData.innerText = "The list is empty. No items to show.";
+
 function onRemove(event) {
   const target = event.target;
   const id = target.parentElement.id;
@@ -33,7 +34,12 @@ function onRemove(event) {
 
   bookList.innerHTML = "";
 
-  bookList.append(...filteredBooksHtml);
+  if (filteredBooksHtml?.length < 1) {
+    bookList.append(noData);
+  } else {
+    bookList.append(...filteredBooksHtml);
+  }
+
   books = filteredBooks;
 }
 
@@ -49,7 +55,6 @@ function createBookElement(book) {
 
   element.append(button);
 
-  //   element.addEventListener("click", console.log);
 
   return element;
 }
@@ -61,9 +66,3 @@ function start() {
 }
 
 start();
-
-// bookList.innerHTML = templateList;
-
-// function createHtmlList(book) {
-//   return `<li id="${book.isbn}">${book.title}</li>`;
-// }
