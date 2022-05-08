@@ -55,7 +55,6 @@ function createBookElement(book) {
 
   element.append(button);
 
-
   return element;
 }
 
