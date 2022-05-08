@@ -39,7 +39,6 @@ function createList() {
 
   const trashCans = document.querySelectorAll("li i");
 
-  //THIS MIGHT BE A PROBLEM
   trashCans.forEach(function (can) {
     can.addEventListener("click", removeFromList);
   });
@@ -48,8 +47,6 @@ function createList() {
 function handleClick(event) {
   event.target.classList.toggle("complete");
 }
-
-//This might be a problem
 
 function removeFromList(event) {
   console.log(event);
